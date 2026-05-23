@@ -7,7 +7,6 @@ dotenv.config();
 
 const app = express();
 
-// CORS diubah menjadi dinamis (origin: true) agar otomatis meloloskan Vercel Frontend
 app.use(cors({
   origin: true,
   credentials: true,
@@ -18,19 +17,12 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/health', (_req, res) => {
-  res.json({
-    status: 'ok',
-    message: 'Event Management API is running'
-  });
+// Rute tes agar /api/health bisa diakses
+app.get('/api/health', (_req, res) => {
+  res.json({ status: 'ok', message: 'API is running' });
 });
 
+// Pastikan semua rute backend memakai prefix /api
 app.use('/api', routes);
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
 
 export default app;
