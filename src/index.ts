@@ -7,12 +7,9 @@ dotenv.config();
 
 const app = express();
 
+// CORS diubah menjadi dinamis (origin: true) agar otomatis meloloskan Vercel Frontend
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'https://feevennt.vercel.app',
-    'https://feevennt-git-main-hpycitra.vercel.app'
-  ],
+  origin: true,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
